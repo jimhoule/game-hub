@@ -1,20 +1,16 @@
-import {
-  List,
-  ListItem,
-  HStack,
-  Image,
-  Button,
-  Spinner,
-  Heading,
-} from '@chakra-ui/react';
+import { List, ListItem, Heading } from '@chakra-ui/react';
+// Components
+import { GenreItem } from './GenreItem';
+import { GenreItemSkeleton } from './GenreItemSkeleton';
+import { GenreItemContainer } from './GenreItemContainer';
 // Hooks
 import { useFetchGenres } from '../hooks/useFetchGenres';
 // Stores
 import { useGameQueryStore } from '../stores/gameQueryStore';
 // Types
 import { Genre } from '../types/genre';
-// Utils
-import { getCroppedImageUrl } from '../utils/getCroppedImageUrl';
+
+const genreItemSkeletons = [1, 2, 3, 4, 5, 6];
 
 export function GenresList(): JSX.Element | null {
   const { selectedGenreId, setSelectedGenreId } = useGameQueryStore(
@@ -26,7 +22,6 @@ export function GenresList(): JSX.Element | null {
   const { data, error, isLoading } = useFetchGenres();
 
   if (error) return null;
-  if (isLoading) return <Spinner />;
 
   return (
     <>
@@ -35,30 +30,27 @@ export function GenresList(): JSX.Element | null {
       </Heading>
 
       <List>
+        {isLoading &&
+          genreItemSkeletons.map((genreItemSkeleton: number): JSX.Element => {
+            return (
+              <ListItem key={genreItemSkeleton}>
+                <GenreItemContainer>
+                  <GenreItemSkeleton />
+                </GenreItemContainer>
+              </ListItem>
+            );
+          })}
+
         {data?.results.map((genre: Genre): JSX.Element => {
           return (
-            <ListItem key={genre.id} paddingY="5px">
-              <HStack>
-                <Image
-                  boxSize="32px"
-                  borderRadius={8}
-                  objectFit="cover"
-                  src={getCroppedImageUrl(genre.image_background)}
+            <ListItem key={genre.id}>
+              <GenreItemContainer>
+                <GenreItem
+                  genre={genre}
+                  selectedGenreId={selectedGenreId as number}
+                  setSelectedGenreId={setSelectedGenreId}
                 />
-
-                <Button
-                  fontWeight={genre.id === selectedGenreId ? 'bold' : 'normal'}
-                  fontSize="lg"
-                  variant="link"
-                  whiteSpace="normal"
-                  textAlign="left"
-                  onClick={(): void => {
-                    setSelectedGenreId(genre.id);
-                  }}
-                >
-                  {genre.name}
-                </Button>
-              </HStack>
+              </GenreItemContainer>
             </ListItem>
           );
         })}
