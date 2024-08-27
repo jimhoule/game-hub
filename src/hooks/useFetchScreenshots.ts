@@ -6,10 +6,10 @@ import { fetchScreenshots } from '../apis/screenshotsApi';
 import { Screenshot } from '../types/screenshot';
 
 export function useFetchScreenshots(gameId: number) {
-    return useQuery({
-        queryKey: ['screenshots', gameId],
-        queryFn: (): Promise<FetchResponse<Screenshot>> => {
-            return fetchScreenshots(gameId)
-        },
-    });
+  return useQuery({
+    queryKey: ['screenshots', gameId],
+    queryFn: (): Promise<FetchResponse<Screenshot>> => {
+      return fetchScreenshots(gameId);
+    },
+  });
 }

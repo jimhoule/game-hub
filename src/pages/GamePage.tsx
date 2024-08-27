@@ -9,44 +9,34 @@ import { GameScreenshots } from '../components/GameScreenshots';
 import { useFetchGame } from '../hooks/useFetchGame';
 
 export function GamePage(): JSX.Element | null {
-    const { slug } = useParams();
-    const { data: game, error, isLoading } = useFetchGame(slug as string);
+  const { slug } = useParams();
+  const { data: game, error, isLoading } = useFetchGame(slug as string);
 
-    if (error) throw error;
-    if (isLoading) return <Spinner />;
-    if (!game) return null;
+  if (error) throw error;
+  if (isLoading) return <Spinner />;
+  if (!game) return null;
 
-    return (
-        <SimpleGrid
-            columns={{
-                base: 1,
-                md: 2,
-            }}
-            spacing={5}
-        >
-            <GridItem>
-                <Heading>
-                    {game.name}
-                </Heading>
+  return (
+    <SimpleGrid
+      columns={{
+        base: 1,
+        md: 2,
+      }}
+      spacing={5}
+    >
+      <GridItem>
+        <Heading>{game.name}</Heading>
 
-                <ExpendableText>
-                    {game.description_raw as string}
-                </ExpendableText>
+        <ExpendableText>{game.description_raw as string}</ExpendableText>
 
-                <GameAttributes 
-                    game={game}
-                />
-            </GridItem>
+        <GameAttributes game={game} />
+      </GridItem>
 
-            <GridItem>
-                <GameTrailer 
-                    gameId={game.id}
-                />
+      <GridItem>
+        <GameTrailer gameId={game.id} />
 
-                <GameScreenshots 
-                    gameId={game.id}
-                />
-            </GridItem>
-        </SimpleGrid>
-    );
+        <GameScreenshots gameId={game.id} />
+      </GridItem>
+    </SimpleGrid>
+  );
 }

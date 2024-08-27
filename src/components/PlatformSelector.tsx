@@ -9,38 +9,37 @@ import { useGameQueryStore } from '../stores/gameQueryStore';
 import { Platform } from '../types/platform';
 
 export function PlatformSelector(): JSX.Element | null {
-    const { selectedPlatformId, setSelectedPlatformId } = useGameQueryStore((store) => ({
-        selectedPlatformId: store.gameQuery.platformId,
-        setSelectedPlatformId: store.setPlatformId,
-    }));
-    const selectedPlatform = useFetchPlatform(selectedPlatformId as number);
-    const { data, error } = useFetchPlatforms();
+  const { selectedPlatformId, setSelectedPlatformId } = useGameQueryStore(
+    (store) => ({
+      selectedPlatformId: store.gameQuery.platformId,
+      setSelectedPlatformId: store.setPlatformId,
+    }),
+  );
+  const selectedPlatform = useFetchPlatform(selectedPlatformId as number);
+  const { data, error } = useFetchPlatforms();
 
-    if (error) return null;
+  if (error) return null;
 
-    return (
-        <Menu>
-            <MenuButton
-                as={Button}
-                rightIcon={<BsChevronDown />}
+  return (
+    <Menu>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        {selectedPlatform?.name || 'Platforms'}
+      </MenuButton>
+
+      <MenuList>
+        {data?.results.map((platform: Platform): JSX.Element => {
+          return (
+            <MenuItem
+              key={platform.id}
+              onClick={() => {
+                setSelectedPlatformId(platform.id);
+              }}
             >
-                {selectedPlatform?.name || 'Platforms'}
-            </MenuButton>
-
-            <MenuList>
-                {data?.results.map((platform: Platform): JSX.Element => {
-                    return (
-                        <MenuItem
-                            key={platform.id}
-                            onClick={() => {
-                                setSelectedPlatformId(platform.id);
-                            }}
-                        >
-                            {platform.name}
-                        </MenuItem>
-                    );
-                })}
-            </MenuList>
-        </Menu>
-    );
+              {platform.name}
+            </MenuItem>
+          );
+        })}
+      </MenuList>
+    </Menu>
+  );
 }

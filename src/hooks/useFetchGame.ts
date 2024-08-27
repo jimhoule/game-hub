@@ -5,10 +5,10 @@ import { fetchGameBySlug } from '../apis/gamesApi';
 import { Game } from '../types/game';
 
 export function useFetchGame(slug: string) {
-    return useQuery({
-        queryKey: ['games', slug],
-        queryFn: (): Promise<Game> => {
-            return fetchGameBySlug(slug);
-        },
-    });
+  return useQuery({
+    queryKey: ['games', slug],
+    queryFn: (): Promise<Game> => {
+      return fetchGameBySlug(slug);
+    },
+  });
 }

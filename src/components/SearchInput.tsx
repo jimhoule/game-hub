@@ -6,36 +6,34 @@ import { BsSearch } from 'react-icons/bs';
 import { useGameQueryStore } from '../stores/gameQueryStore';
 
 export function SearchInput(): JSX.Element {
-    const navigate = useNavigate();
-    const setSearch = useGameQueryStore((store) => store.setSearch);
-    const [searchText, setSearchText] = useState<string>('');
+  const navigate = useNavigate();
+  const setSearch = useGameQueryStore((store) => store.setSearch);
+  const [searchText, setSearchText] = useState<string>('');
 
-    return (
-        <form
-            onSubmit={(event: FormEvent<HTMLFormElement>): void => {
-                event.preventDefault();
+  return (
+    <form
+      onSubmit={(event: FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
 
-                if (!searchText) return;
+        if (!searchText) return;
 
-                setSearch(searchText);
-                navigate('/');
-            }}
-        >
-            <InputGroup>
-                <InputLeftElement 
-                    children={<BsSearch />}
-                />
+        setSearch(searchText);
+        navigate('/');
+      }}
+    >
+      <InputGroup>
+        <InputLeftElement children={<BsSearch />} />
 
-                <Input 
-                    borderRadius={20}
-                    placeholder='Search games...'
-                    variant='filled'
-                    value={searchText}
-                    onChange={(event: ChangeEvent<HTMLInputElement>): void => {
-                        setSearchText(event.currentTarget.value);
-                    }}
-                />
-            </InputGroup>
-        </form>
-    );
+        <Input
+          borderRadius={20}
+          placeholder="Search games..."
+          variant="filled"
+          value={searchText}
+          onChange={(event: ChangeEvent<HTMLInputElement>): void => {
+            setSearchText(event.currentTarget.value);
+          }}
+        />
+      </InputGroup>
+    </form>
+  );
 }

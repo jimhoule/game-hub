@@ -4,11 +4,11 @@ import { useFetchPlatforms } from './useFetchPlatforms';
 import { Platform } from '../types/platform';
 
 export function useFetchPlatform(id: number): Platform {
-    const { data } = useFetchPlatforms();
+  const { data } = useFetchPlatforms();
 
-    const platform = data?.results.find((platform: Platform): boolean => {
-        return platform.id === id;
-    });
+  const platform = data?.results.find((platform: Platform): boolean => {
+    return platform.id === id;
+  });
 
-    return platform as Platform;
+  return platform as Platform;
 }

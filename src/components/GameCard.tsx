@@ -12,46 +12,33 @@ import { Platform } from '../types/platform';
 import { getCroppedImageUrl } from '../utils/getCroppedImageUrl';
 
 type Props = {
-    game: Game;
+  game: Game;
 };
 
 export function GameCard({ game }: Props): JSX.Element {
-    return (
-        <Card>
-            <Image 
-                src={getCroppedImageUrl(game.background_image)}
-            />
+  return (
+    <Card>
+      <Image src={getCroppedImageUrl(game.background_image)} />
 
-            <CardBody>
-                <HStack
-                    justifyContent='space-between'
-                    marginBottom={3}
-                >
-                    <PlatformIcons 
-                        platforms={game.parent_platforms.map((parentPlatform: ParentPlatform): Platform => {
-                            return parentPlatform.platform;
-                        })}
-                    />
+      <CardBody>
+        <HStack justifyContent="space-between" marginBottom={3}>
+          <PlatformIcons
+            platforms={game.parent_platforms.map(
+              (parentPlatform: ParentPlatform): Platform => {
+                return parentPlatform.platform;
+              },
+            )}
+          />
 
-                    <CriticScore 
-                        score={game.metacritic}
-                    />
-                </HStack>
+          <CriticScore score={game.metacritic} />
+        </HStack>
 
-                <Heading
-                    fontSize='2xl'
-                >
-                    <Link
-                        to={`/games/${game.slug}`}
-                    >
-                        {game.name}
-                    </Link>
+        <Heading fontSize="2xl">
+          <Link to={`/games/${game.slug}`}>{game.name}</Link>
 
-                    <Emoji 
-                        rating={game.rating_top}
-                    />
-                </Heading>
-            </CardBody>
-        </Card>
-    );
+          <Emoji rating={game.rating_top} />
+        </Heading>
+      </CardBody>
+    </Card>
+  );
 }

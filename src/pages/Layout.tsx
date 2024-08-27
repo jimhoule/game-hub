@@ -4,15 +4,13 @@ import { Box } from '@chakra-ui/react';
 import { NavBar } from '../components/NavBar';
 
 export function Layout(): JSX.Element {
-    return (
-        <>
-            <NavBar />
+  return (
+    <>
+      <NavBar />
 
-            <Box
-                padding={5}
-            >
-                <Outlet />
-            </Box>
-        </>
-    );
+      <Box padding={5}>
+        <Outlet />
+      </Box>
+    </>
+  );
 }

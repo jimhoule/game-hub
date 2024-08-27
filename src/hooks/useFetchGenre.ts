@@ -4,11 +4,11 @@ import { useFetchGenres } from './useFetchGenres';
 import { Genre } from '../types/genre';
 
 export function useFetchGenre(id: number): Genre {
-    const { data } = useFetchGenres();
+  const { data } = useFetchGenres();
 
-    const genre = data?.results.find((genre: Genre): boolean => {
-        return genre.id === id;
-    });
+  const genre = data?.results.find((genre: Genre): boolean => {
+    return genre.id === id;
+  });
 
-    return genre as Genre;
+  return genre as Genre;
 }

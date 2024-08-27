@@ -6,10 +6,10 @@ import { fetchTrailers } from '../apis/trailersApi';
 import { Trailer } from '../types/trailer';
 
 export function useFetchTrailers(gameId: number) {
-    return useQuery({
-        queryKey: ['trailers', gameId],
-        queryFn: (): Promise<FetchResponse<Trailer>> => {
-            return fetchTrailers(gameId)
-        },
-    });
+  return useQuery({
+    queryKey: ['trailers', gameId],
+    queryFn: (): Promise<FetchResponse<Trailer>> => {
+      return fetchTrailers(gameId);
+    },
+  });
 }

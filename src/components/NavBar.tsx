@@ -7,23 +7,15 @@ import { ColorModeSwitch } from './ColorModeSwitch';
 import { SearchInput } from './SearchInput';
 
 export function NavBar(): JSX.Element {
-    return (
-        <HStack
-            padding='10px'
-        >
-            <Link
-                to='/'
-            >
-                <Image 
-                    src={logo}
-                    boxSize='60px'
-                    objectFit='cover'
-                />
-            </Link>
+  return (
+    <HStack padding="10px">
+      <Link to="/">
+        <Image src={logo} boxSize="60px" objectFit="cover" />
+      </Link>
 
-            <SearchInput />
+      <SearchInput />
 
-            <ColorModeSwitch />
-        </HStack>
-    );
+      <ColorModeSwitch />
+    </HStack>
+  );
 }
